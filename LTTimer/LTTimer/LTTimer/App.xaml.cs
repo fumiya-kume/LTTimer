@@ -1,5 +1,7 @@
-﻿using Prism.Unity;
+﻿using LTTimer.Azure.Model;
+using Prism.Unity;
 using LTTimer.Views;
+using Microsoft.Practices.Unity;
 
 namespace LTTimer
 {
@@ -17,6 +19,7 @@ namespace LTTimer
         protected override void RegisterTypes()
         {
             Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterType<ITimerTableClient, TimerTableClient>(new ContainerControlledLifetimeManager());
         }
     }
 }

@@ -12,7 +12,7 @@ namespace LTTimer.Azure.Model
         public async Task<TimerTable> GetTimer(string key)
         {
             var timer = await Client.GetTable<TimerTable>().Where(table => table.Name == key).ToListAsync();
-            return timer.FirstOrDefault();
+            return timer.First();
         }
 
         public async void StartTimer(string key)
