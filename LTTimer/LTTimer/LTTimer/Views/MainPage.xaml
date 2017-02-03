@@ -5,7 +5,23 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LTTimer.Views.MainPage"
              Title="MainPage">
-  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-    <Label Text="{Binding Title}" />
+  <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Editor Text="{Binding DataKey.Value}" Grid.Column="0" Grid.Row="0"></Editor>
+      <Button Text="Start" Grid.Column="1" Grid.Row="0" Command="{Binding StartTimer}"></Button>
+      <Label Text="{Binding LtTime.Value, StringFormat='{0:mm:ss}'}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="128">
+        <Label.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding RefreshTime}"></TapGestureRecognizer>
+        </Label.GestureRecognizers>
+      </Label>
+    </Grid>
   </StackLayout>
 </ContentPage>
