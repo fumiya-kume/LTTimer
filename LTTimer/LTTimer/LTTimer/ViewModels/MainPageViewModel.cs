@@ -20,6 +20,7 @@ namespace LTTimer.ViewModels
         public ReactiveProperty<string> DataKey { get; set; } = new ReactiveProperty<string>("");
         public ReactiveProperty<DateTime> LtTime { get; set; }
         public ReactiveProperty<bool> IsEditableKey{ get; set; }
+        public ReactiveProperty<int> TimerFontSize { get; set; } = new ReactiveProperty<int>(100);
         public ReactiveCommand StartTimer { get; set; }
         public ReactiveCommand RefreshTime { get; set; }
 
