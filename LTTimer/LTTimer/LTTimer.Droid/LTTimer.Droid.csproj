@@ -173,7 +173,7 @@
     <AndroidResource Include="Resources\values-v21\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LTTimer\LTTimer.csproj">

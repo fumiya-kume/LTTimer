@@ -12,10 +12,10 @@ namespace LTTimer.Azure.Model
         public async Task<TimerTable> GetTimer(string key)
         {
             var timer = await Client.GetTable<TimerTable>().Where(table => table.Name == key).ToListAsync();
-            return timer.First();
+            return timer.FirstOrDefault();
         }
 
-        public async void StartTimer(string key)
+        public async Task StartTimer(string key)
         {
             await Client.GetTable<TimerTable>().InsertAsync(new TimerTable {Name = key});
         }
