@@ -1,7 +1,8 @@
-﻿using LTTimer.Azure.Model;
+﻿using System.Net.Http;
 using Prism.Unity;
 using LTTimer.Views;
 using Microsoft.Practices.Unity;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace LTTimer
 {
@@ -19,7 +20,9 @@ namespace LTTimer
         protected override void RegisterTypes()
         {
             Container.RegisterTypeForNavigation<MainPage>();
-            Container.RegisterType<ITimerTableClient, TimerTableClient>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<MobileServiceClient>(
+                new ContainerControlledLifetimeManager(),
+                new InjectionConstructor("http://lttimer.azurewebsites.net", new HttpMessageHandler[0]));
         }
     }
 }

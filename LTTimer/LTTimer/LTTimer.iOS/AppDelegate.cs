@@ -27,7 +27,7 @@ namespace LTTimer.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
 
-            //Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             return base.FinishedLaunching(app, options);
         }
@@ -37,7 +37,6 @@ namespace LTTimer.iOS
     {
         public void RegisterTypes(IUnityContainer container)
         {
-
         }
     }
 
