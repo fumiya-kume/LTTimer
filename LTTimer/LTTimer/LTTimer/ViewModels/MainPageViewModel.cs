@@ -1,56 +1,54 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using LTTimer.Azure.Model;
-using Prism.Services;
+using LTTimer.Model;
+using Microsoft.WindowsAzure.MobileServices;
 using Reactive.Bindings;
 
 namespace LTTimer.ViewModels
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
-        private readonly ITimerTableClient _timerTableClient;
-        private readonly IPageDialogService _pageDialogService;
+        private readonly MobileServiceClient _mobileServiceClient;
+        private readonly CountdownTimer CountdownTimer = new CountdownTimer();
         public ReactiveProperty<string> DataKey { get; set; } = new ReactiveProperty<string>("");
-        public ReactiveProperty<DateTime> LtTime { get; set; } = new ReactiveProperty<DateTime>();
+        public ReactiveProperty<DateTime> LtTime { get; set; }
+        public ReactiveProperty<bool> IsEditableKey { get; set; }
+        public ReactiveProperty<int> TimerFontSize { get; set; } = new ReactiveProperty<int>(100);
         public ReactiveCommand StartTimer { get; set; }
         public ReactiveCommand RefreshTime { get; set; }
 
-        public MainPageViewModel(ITimerTableClient timerTableClient, IPageDialogService pageDialogService)
+        public MainPageViewModel(MobileServiceClient mobileServiceClient)
         {
-            _timerTableClient = timerTableClient;
-            _pageDialogService = pageDialogService;
+            _mobileServiceClient = mobileServiceClient;
+            _mobileServiceClient = mobileServiceClient;
             StartTimer = DataKey
-                .Where(s => !string.IsNullOrWhiteSpace(s))
-                .Select(s => true)
-                .ToReactiveCommand();
-
-            StartTimer.Subscribe(o =>
-            {
-                KeyCheck();
-                timerTableClient.StartTimer(DataKey.Value);
-            });
-
-            RefreshTime = DataKey
                 .Select(s => !string.IsNullOrWhiteSpace(s))
                 .ToReactiveCommand();
-            
-            RefreshTime.Subscribe(async o =>
+
+            StartTimer.Subscribe(async o =>
             {
-                var timerresult = await _timerTableClient.GetTimer(DataKey.Value);
-                var ts = timerresult.CreatedAt.AddMinutes(5.0) - DateTime.Now;
-                LtTime.Value = new DateTime().Add(ts);
+                // Start LT Timer in Azure Mobile Apps
+                await _mobileServiceClient
+                    .GetTable<TimerTable>()
+                    .InsertAsync(new TimerTable { Name = DataKey.Value });
+
+                // Get LT Timer Value in Azure Mobile Apps
+                var timerList = await _mobileServiceClient.GetTable<TimerTable>()
+                        .Where(table => table.Name == DataKey.Value)
+                        .ToListAsync();
+
+                var ts = timerList.FirstOrDefault().CreatedAt.AddMinutes(5.0) - DateTime.Now;
+                CountdownTimer.Start((int)ts.TotalSeconds);
             });
 
-        }
+            LtTime = CountdownTimer.Secounds
+                .Select(status => CountdownTimer.Secounds.Count)
+                .Select(i => new DateTime().AddSeconds(i))
+                .ToReactiveProperty();
 
-        private void KeyCheck()
-        {
-            if (DataKey.Value == "") _pageDialogService.DisplayAlertAsync("Alert", "Key Not found", "OK");
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
