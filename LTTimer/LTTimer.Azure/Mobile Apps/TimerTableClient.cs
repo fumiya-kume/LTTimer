@@ -24,7 +24,7 @@ namespace LTTimer.Azure.Mobile_Apps
         public static async Task<DateTime> GetTimeFromTimerTable(string name)
         {
             var timerList =
-                await TimerTable.Where(table => table.Name == name).OrderBy(table => table.CreatedAt).ToListAsync();
+                await TimerTable.Where(table => table.Name == name).Where(table => !table.Deleted).OrderBy(table => table.CreatedAt).ToListAsync();
             return timerList.First().CreatedAt;
         }
 
