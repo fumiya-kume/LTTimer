@@ -1,10 +1,10 @@
 ﻿using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Linq;
 using System.Reactive.Linq;
 using LTTimer.Model;
 using Reactive.Bindings;
+using static LTTimer.Azure.Mobile_Apps.TimerTableClient;
 
 namespace LTTimer.ViewModels
 {
@@ -15,29 +15,23 @@ namespace LTTimer.ViewModels
         public ReactiveProperty<DateTime> LtTime { get; set; }
         public ReactiveProperty<bool> IsEditableKey { get; set; }
         public ReactiveProperty<int> TimerFontSize { get; set; } = new ReactiveProperty<int>(100);
-        public ReactiveCommand StartTimer { get; set; }
-        public ReactiveCommand RefreshTime { get; set; }
+        public ReactiveCommand StartTimerCommand { get; set; }
+        public ReactiveCommand RefreshTimeCommand { get; set; }
 
         public MainPageViewModel()
         {
-            StartTimer = DataKey
+            StartTimerCommand = DataKey
                 .Select(s => !string.IsNullOrWhiteSpace(s))
                 .ToReactiveCommand();
 
-            StartTimer.Subscribe(async o =>
+            StartTimerCommand.Subscribe(async o =>
             {
-                //// Start LT Timer in Azure Mobile Apps
-                //await _mobileServiceClient
-                //    .GetTable<TimerTable>()
-                //    .InsertAsync(new TimerTable { Name = DataKey.Value });
+                await StartTimer(DataKey.Value);
 
-                //// Get LT Timer Value in Azure Mobile Apps
-                //var timerList = await _mobileServiceClient.GetTable<TimerTable>()
-                //        .Where(table => table.Name == DataKey.Value)
-                //        .ToListAsync();
+                var timerData = await GetTimeFromTimerTable(DataKey.Value);
+                var ts = timerData.AddMinutes(5f) - DateTime.Now;
 
-                //var ts = timerList.FirstOrDefault().CreatedAt.AddMinutes(5.0) - DateTime.Now;
-                //CountdownTimer.Start((int)ts.TotalSeconds);
+                CountdownTimer.Start((int)ts.TotalSeconds);
             });
 
             LtTime = CountdownTimer.Secounds
