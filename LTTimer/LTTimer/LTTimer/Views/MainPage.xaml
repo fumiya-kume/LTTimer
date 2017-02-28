@@ -5,28 +5,32 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LTTimer.Views.MainPage"
              Title="MainPage">
-<ContentPage.Padding>
-<OnPlatform x:TypeArguments="Thickness"
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
 iOS="0,20,10,0"
 Android="0"
 WinPhone="0" />
-</ContentPage.Padding>
+    </ContentPage.Padding>
     <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"></RowDefinition>
-        <RowDefinition Height="*"></RowDefinition>
-        <RowDefinition Height="Auto"></RowDefinition>
-      </Grid.RowDefinitions>
-      <Label Text="LTKey" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-      <Editor Text="{Binding DataKey.Value}" IsEnabled="{Binding IsEditableKey.Value}" Grid.Column="1" Grid.Row="0"></Editor>
-      <Button Text="Start" Grid.Column="2" Grid.Row="0" Command="{Binding StartTimer}"></Button>
-      <Label Text="{Binding LtTime.Value, StringFormat='{0:mm:ss}'}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="{Binding TimerFontSize.Value}"/>
-      <Slider Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Maximum="256" Minimum="10" Value="{Binding TimerFontSize.Value}"></Slider>
-      <Label Text="フォントサイズ" Grid.Row="2" Grid.Column="2"></Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Text="LTKey" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+        <Editor Text="{Binding DataKey.Value}" IsEnabled="{Binding IsEditableKey.Value}" Grid.Column="1" Grid.Row="0"></Editor>
+        <Button Text="Start" Grid.Column="2" Grid.Row="0" Command="{Binding StartTimerCommand}"></Button>
+        <Label Text="{Binding LtTime.Value, StringFormat='{0:mm:ss}'}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="{Binding TimerFontSize.Value}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding RefreshTimeCommand}"></TapGestureRecognizer>
+            </Label.GestureRecognizers>
+        </Label>
+        <Slider Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Maximum="256" Minimum="10" Value="{Binding TimerFontSize.Value}"></Slider>
+        <Label Text="フォントサイズ" Grid.Row="2" Grid.Column="2"></Label>
     </Grid>
 </ContentPage>
