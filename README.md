@@ -1,2 +1,2 @@
 # LTTimer
-[![Build Status](https://travis-ci.org/fumiya-kume/LTTimer.svg?branch=master)](https://travis-ci.org/fumiya-kume/LTTimer)
+[![Build status](https://ci.appveyor.com/api/projects/status/4g7n3gihq209fr06?svg=true)](https://ci.appveyor.com/project/fumiya-kume/lttimer)
