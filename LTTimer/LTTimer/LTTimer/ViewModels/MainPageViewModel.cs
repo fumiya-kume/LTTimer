@@ -2,6 +2,7 @@
 using Prism.Navigation;
 using System;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using LTTimer.Model;
 using Reactive.Bindings;
 using static LTTimer.Azure.Mobile_Apps.TimerTableClient;
@@ -24,14 +25,20 @@ namespace LTTimer.ViewModels
                 .Select(s => !string.IsNullOrWhiteSpace(s))
                 .ToReactiveCommand();
 
+            RefreshTimeCommand = DataKey
+                .Select(s => !string.IsNullOrEmpty(s))
+                .ToReactiveCommand();
+
             StartTimerCommand.Subscribe(async o =>
             {
                 await StartTimer(DataKey.Value);
 
-                var timerData = await GetTimeFromTimerTable(DataKey.Value);
-                var ts = timerData.AddMinutes(5f) - DateTime.Now;
+                await RefreshTimer();
+            });
 
-                CountdownTimer.Start((int)ts.TotalSeconds);
+            RefreshTimeCommand.Subscribe(async o =>
+            {
+                await RefreshTimer();
             });
 
             LtTime = CountdownTimer.Secounds
@@ -39,6 +46,19 @@ namespace LTTimer.ViewModels
                 .Select(i => new DateTime().AddSeconds(i))
                 .ToReactiveProperty();
 
+        }
+
+        private async Task RefreshTimer()
+        {
+            var timerData = await GetTimeFromTimerTable(DataKey.Value);
+            var ts = timerData.AddMinutes(5f) - DateTime.Now;
+
+            if (ts.Ticks < 0)
+            {
+                return;
+            }
+
+            CountdownTimer.Start((int) ts.TotalSeconds);
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
