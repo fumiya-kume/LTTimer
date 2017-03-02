@@ -7,7 +7,7 @@
              Title="MainPage">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
-iOS="0,20,10,0"
+iOS="0,20,0,0"
 Android="0"
 WinPhone="0" />
     </ContentPage.Padding>
@@ -23,7 +23,13 @@ WinPhone="0" />
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Text="LTKey" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-        <Editor Text="{Binding DataKey.Value}" IsEnabled="{Binding IsEditableKey.Value}" Grid.Column="1" Grid.Row="0"></Editor>
+        <Editor Text="{Binding DataKey.Value}" IsEnabled="{Binding IsEditableKey.Value}" Grid.Column="1" Grid.Row="0" >
+            <Editor.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color"
+                    iOS="Silver"
+                />
+            </Editor.BackgroundColor>
+        </Editor>
         <Button Text="Start" Grid.Column="2" Grid.Row="0" Command="{Binding StartTimerCommand}"></Button>
         <Label Text="{Binding LtTime.Value, StringFormat='{0:mm:ss}'}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="{Binding TimerFontSize.Value}">
             <Label.GestureRecognizers>
