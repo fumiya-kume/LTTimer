@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Mobile Apps\Define\TimerTable.cs" />
-    <Compile Include="Mobile Apps\TimerTableClient.cs" />
+    <Compile Include="Mobile Apps\TimerTable.cs" />
     <Compile Include="Mobile Apps\Variable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

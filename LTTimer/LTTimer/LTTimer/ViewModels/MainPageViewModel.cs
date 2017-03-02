@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using LTTimer.Model;
 using Reactive.Bindings;
-using static LTTimer.Azure.Mobile_Apps.TimerTableClient;
+using static LTTimer.Azure.Mobile_Apps.TimerTable;
 
 namespace LTTimer.ViewModels
 {
@@ -50,7 +50,15 @@ namespace LTTimer.ViewModels
 
         private async Task RefreshTimer()
         {
-            var timerData = await GetTimeFromTimerTable(DataKey.Value);
+            var timerData = new DateTime();
+            try
+            {
+                 timerData = await GetTime(DataKey.Value);
+            }
+            catch (NullReferenceException e)
+            {
+                return;
+            }
             var ts = timerData.AddMinutes(5f) - DateTime.Now;
 
             if (ts.Ticks < 0)
