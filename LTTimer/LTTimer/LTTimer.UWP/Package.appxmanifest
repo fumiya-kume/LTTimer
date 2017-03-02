@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="54856.LTTimer" Publisher="CN=3CDA6CA8-7BA5-4122-AED8-907D53DA1054" Version="1.1.14.0" />
+  <Identity Name="54856.LTTimer" Publisher="CN=3CDA6CA8-7BA5-4122-AED8-907D53DA1054" Version="1.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="eaddd7f5-1943-4d92-95e7-f399aa9acdd9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>LTTimer</DisplayName>
