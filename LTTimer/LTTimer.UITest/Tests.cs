@@ -52,6 +52,24 @@ namespace LTTimer.UITest
             _app.ExScreenShot($"フォントサイズ{fontSize}への変更テスト");
         }
 
+        [Test]
+        public void 設定画面を開くテスト()
+        {
+            _app.Tap(query => query.Marked("NavigateSettingButton"));
+
+            _app.ExScreenShot("設定を開いた画面");
+        }
+
+        [Test]
+        public void 終了時に効果音がなるかどうかを設定を変更するテスト()
+        {
+            _app.Tap(query => query.Marked("NavigateSettingButton"));
+
+            _app.Tap(query => query.Marked("SwitchPlaySoundEffects"));
+
+            _app.ExScreenShot("効果音を無効にした設定画面");
+        }
+
         [TestFixtureTearDown]
         public void TestFinishe()
         {
