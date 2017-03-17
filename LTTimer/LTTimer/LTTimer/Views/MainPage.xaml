@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:view="clr-namespace:LTTimer.View;assembly=LTTimer"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LTTimer.Views.MainPage"
              Title="MainPage">
@@ -22,7 +23,15 @@ WinPhone="0" />
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Text="LTKey" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+        <view:CustonFontTextView AutomationId="NavigateSettingButton" Grid.Row="0" Grid.Column="0" Text="&#xE713;">
+            <view:CustonFontTextView.FontFamily>
+                <OnPlatform x:TypeArguments="x:String"
+                    iOS="Segoe MDL2 Assets"
+                    Android="Fonts/SEGMDL2.TTF"
+                    WinPhone="Segoe MDL2 Assets">
+                </OnPlatform>
+            </view:CustonFontTextView.FontFamily>
+        </view:CustonFontTextView>
         <Editor AutomationId="DataKeyEditor" Text="{Binding DataKey.Value}" IsEnabled="{Binding IsEditableKey.Value}" Grid.Column="1" Grid.Row="0" >
             <Editor.BackgroundColor>
                 <OnPlatform x:TypeArguments="Color"
