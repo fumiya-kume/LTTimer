@@ -2,6 +2,7 @@
 using Prism.Unity;
 using LTTimer.Views;
 using Microsoft.Practices.Unity;
+using Xamarin.Forms;
 
 namespace LTTimer
 {
@@ -13,12 +14,14 @@ namespace LTTimer
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
+            NavigationService.NavigateAsync("NavigationPage/MainPage?title=Hello%20from%20Xamarin.Forms");
         }
 
         protected override void RegisterTypes()
         {
+            Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<SettingPage>();
         }
     }
 }

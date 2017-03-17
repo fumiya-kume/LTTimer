@@ -4,6 +4,7 @@ using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using LTTimer.Model;
+using LTTimer.Views;
 using Reactive.Bindings;
 using static LTTimer.Azure.Mobile_Apps.TimerTable;
 
@@ -11,6 +12,7 @@ namespace LTTimer.ViewModels
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
+        private readonly INavigationService _navigationService;
         private readonly CountdownTimer CountdownTimer = new CountdownTimer();
         public ReactiveProperty<string> DataKey { get; set; } = new ReactiveProperty<string>("");
         public ReactiveProperty<DateTime> LtTime { get; set; }
@@ -18,9 +20,11 @@ namespace LTTimer.ViewModels
         public ReactiveProperty<int> TimerFontSize { get; set; } = new ReactiveProperty<int>(100);
         public ReactiveCommand StartTimerCommand { get; set; }
         public ReactiveCommand RefreshTimeCommand { get; set; }
+        public ReactiveCommand NavigateSettingPage { get; set; } = new ReactiveCommand();
 
-        public MainPageViewModel()
+        public MainPageViewModel(INavigationService navigationService)
         {
+            _navigationService = navigationService;
             StartTimerCommand = DataKey
                 .Select(s => !string.IsNullOrWhiteSpace(s))
                 .ToReactiveCommand();
@@ -46,6 +50,7 @@ namespace LTTimer.ViewModels
                 .Select(i => new DateTime().AddSeconds(i))
                 .ToReactiveProperty();
 
+            NavigateSettingPage.Subscribe(_ => navigationService.NavigateAsync(nameof(SettingPage)));
         }
 
         private async Task RefreshTimer()

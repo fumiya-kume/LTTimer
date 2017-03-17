@@ -5,6 +5,7 @@
              xmlns:view="clr-namespace:LTTimer.View;assembly=LTTimer"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LTTimer.Views.MainPage"
+             NavigationPage.HasNavigationBar="False"
              Title="MainPage">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
@@ -23,7 +24,7 @@ WinPhone="0" />
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <view:CustonFontTextView AutomationId="NavigateSettingButton" Grid.Row="0" Grid.Column="0" Text="&#xE713;">
+        <view:CustonFontTextView AutomationId="NavigateSettingButton" Grid.Row="0" Grid.Column="0" Text="&#xE713;" Command="{Binding NavigateSettingPage}">
             <view:CustonFontTextView.FontFamily>
                 <OnPlatform x:TypeArguments="x:String"
                     iOS="Segoe MDL2 Assets"

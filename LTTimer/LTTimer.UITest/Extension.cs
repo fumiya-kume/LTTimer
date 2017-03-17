@@ -9,11 +9,8 @@ namespace LTTimer.UITest
         public static void ExScreenShot(this IApp app, string Title)
         {
             var fileInfo = app.Screenshot(Title);
-            Console.WriteLine(fileInfo.DirectoryName);
-            if(!Directory.Exists(fileInfo.DirectoryName + ".\\ScreenShot"))
-            {  
-                Directory.CreateDirectory(fileInfo.DirectoryName + ".\\ScreenShot");
-            }
+
+            Directory.CreateDirectory(fileInfo.DirectoryName + ".\\ScreenShot");
 
             if (File.Exists($".\\ScreenShot\\{Title}.png"))
             {

@@ -22,12 +22,19 @@ namespace LTTimer.UITest
         public void BeforeRun()
         {
             _app = AppInitializer.StartApp(_platform);
+
+            if (Directory.Exists(Directory.GetCurrentDirectory() + ".\\ScreenShot"))
+            {
+                Directory.Delete(Directory.GetCurrentDirectory() + ".\\ScreenShot", true);
+            }
         }
         
         [TestCase("あいうえお")]
         [TestCase("abcd")]
         public async void タイマーテスト(string datakey)
         {
+            _app = AppInitializer.StartApp(_platform);
+
             _app.EnterText(query => query.Marked("DataKeyEditor"), datakey);
             _app.DismissKeyboard();
 
@@ -48,6 +55,8 @@ namespace LTTimer.UITest
         [TestCaseSource(nameof(_fontSizeList))]
         public void フォントサイズの変更テスト(int fontSize)
         {
+            _app = AppInitializer.StartApp(_platform);
+
             _app.SetSliderValue(x => x.Marked("FontSizeSlider"), fontSize);
             _app.ExScreenShot($"フォントサイズ{fontSize}への変更テスト");
         }
@@ -55,6 +64,8 @@ namespace LTTimer.UITest
         [Test]
         public void 設定画面を開くテスト()
         {
+            _app = AppInitializer.StartApp(_platform);
+
             _app.Tap(query => query.Marked("NavigateSettingButton"));
 
             _app.ExScreenShot("設定を開いた画面");
@@ -63,6 +74,8 @@ namespace LTTimer.UITest
         [Test]
         public void 終了時に効果音がなるかどうかを設定を変更するテスト()
         {
+            _app = AppInitializer.StartApp(_platform);
+
             _app.Tap(query => query.Marked("NavigateSettingButton"));
 
             _app.Tap(query => query.Marked("SwitchPlaySoundEffects"));
