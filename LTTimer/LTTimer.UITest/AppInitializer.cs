@@ -9,7 +9,8 @@ namespace LTTimer.UITest
     public class AppInitializer
     {
         public static string APKpath { get; set; } =
-            @"C:\Users\gurag\AppData\Local\Xamarin\Mono for Android\Archives\2017-03-17\LTTimer.Droid 3-17-17 4.42 PM.apkarchive\LTTimer.Droid.apk";
+            @"C:\Users\gurag\Source\Repos\LTTimer\LTTimer\LTTimer\LTTimer.Droid\bin\Release\LTTimer.Droid-Signed.apk";
+
 
         public static IApp StartApp(Platform platform)
         {
