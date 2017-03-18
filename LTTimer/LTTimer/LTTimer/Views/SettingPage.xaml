@@ -5,5 +5,10 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LTTimer.Views.SettingPage"
              Title="設定">
-  
+    <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20,0,0">
+            <Label Margin="0,5,0,0" Text="終了時に効果音を鳴らすか"></Label>
+            <Switch  AutomationId="SwitchPlaySoundEffects"/>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>

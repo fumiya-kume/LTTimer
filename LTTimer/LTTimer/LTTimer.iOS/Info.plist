@@ -47,11 +47,5 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleShortVersionString</key>
 	<string></string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Fonts/SEGMDL2.TTF</string>
-	</array>
-	<key>CustomProperty</key>
-	<string></string>
 </dict>
 </plist>
