@@ -104,8 +104,6 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
-    <ITunesArtwork Include="Resources\iTunesArtwork" />
-    <ITunesArtwork Include="Resources\iTunesArtwork%402x" />
     <BundleResource Include="Resources\Fonts\SEGMDL2.TTF" />
   </ItemGroup>
   <ItemGroup>

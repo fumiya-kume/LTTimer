@@ -31,7 +31,7 @@ namespace LTTimer.UITest
         
         [TestCase("あいうえお")]
         [TestCase("abcd")]
-        public async void タイマーテスト(string datakey)
+        public void タイマーテスト(string datakey)
         {
             _app = AppInitializer.StartApp(_platform);
 
@@ -39,7 +39,7 @@ namespace LTTimer.UITest
             _app.DismissKeyboard();
 
             _app.Tap(query => query.Marked("StartTimerButton"));
-            await Task.Delay(10000);
+            
             _app.ExScreenShot($"{datakey} でタイマーが開始するかのテスト");
         }
 
@@ -67,7 +67,7 @@ namespace LTTimer.UITest
             _app = AppInitializer.StartApp(_platform);
 
             _app.Tap(query => query.Marked("NavigateSettingButton"));
-
+            _app.WaitForElement(query => query.Marked("SettingPage"));
             _app.ExScreenShot("設定を開いた画面");
         }
 
@@ -79,7 +79,7 @@ namespace LTTimer.UITest
             _app.Tap(query => query.Marked("NavigateSettingButton"));
 
             _app.Tap(query => query.Marked("SwitchPlaySoundEffects"));
-
+            _app.WaitForElement(query => query.Marked("SettingPage"));
             _app.ExScreenShot("効果音を無効にした設定画面");
         }
 
