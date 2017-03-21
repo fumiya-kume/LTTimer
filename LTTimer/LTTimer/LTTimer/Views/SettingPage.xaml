@@ -11,7 +11,7 @@
     <StackLayout Orientation="Vertical">
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20,0,0">
             <Label Margin="0,5,0,0" Text="終了時に効果音を鳴らすか"></Label>
-            <Switch  AutomationId="SwitchPlaySoundEffects"/>
+            <Switch  AutomationId="SwitchPlaySoundEffects" IsToggled="{Binding IsSoundWhenTimerFisnish.Value, Mode=TwoWay}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>
