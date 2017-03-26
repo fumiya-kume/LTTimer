@@ -60,7 +60,7 @@ namespace LTTimer.ViewModels
             {
                  timerData = await GetTime(DataKey.Value);
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 return;
             }
@@ -80,6 +80,10 @@ namespace LTTimer.ViewModels
         }
 
         public void OnNavigatedTo(NavigationParameters parameters)
+        {
+        }
+
+        public void OnNavigatingTo(NavigationParameters parameters)
         {
         }
     }
