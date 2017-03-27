@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LTTimer.UWP;
+using LTTimer;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
 
