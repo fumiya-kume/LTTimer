@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LTTimer.Views.SettingPage"
+             AutomationId="SettingPage"
+             xmlns:viewModel="clr-namespace:LTTimer.ViewModels;assembly=LTTimer"
+             BindingContext="{Binding Source={x:Static viewModel:DesignTimeViewModelLocator.SettingPageViewModel}}"
+             Title="設定">
+    <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20,0,0">
+            <Label Margin="0,5,0,0" Text="終了時に効果音を鳴らすか"></Label>
+            <Switch  AutomationId="SwitchPlaySoundEffects" IsToggled="{Binding IsSoundWhenTimerFisnish.Value, Mode=TwoWay}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

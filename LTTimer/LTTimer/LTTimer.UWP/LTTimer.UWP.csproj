@@ -95,6 +95,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Fonts\SEGMDL2.TTF" />
     <None Include="LTTimer.UWP_StoreKey.pfx" />
     <None Include="LTTimer.UWP_TemporaryKey.pfx" />
     <None Include="project.json" />
@@ -107,6 +108,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\CustonFontTextViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
