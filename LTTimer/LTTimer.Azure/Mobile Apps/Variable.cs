@@ -4,6 +4,6 @@ namespace LTTimer.Azure.Mobile_Apps
 {
      public static class Variable
     {
-       public static MobileServiceClient MobileAppsInstance => new MobileServiceClient("http://lttimer-app.azurewebsites.net");
+       public static MobileServiceClient MobileAppsInstance => new MobileServiceClient("http://lttimer.azurewebsites.net");
     }
 }

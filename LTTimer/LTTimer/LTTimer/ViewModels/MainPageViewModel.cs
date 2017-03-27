@@ -50,6 +50,17 @@ namespace LTTimer.ViewModels
                 .Select(i => new DateTime().AddSeconds(i))
                 .ToReactiveProperty();
 
+            CountdownTimer.Secounds
+                .Select(status => CountdownTimer.Secounds.Count)
+                .Where(i => i == 0)
+                .Where(i => SoundEffectSettingService.GeneralSettings)
+                .Subscribe(async i =>
+                {
+                    await Plugin.MediaManager.CrossMediaManager.Current.Play(
+                        "https://mu6.me/file/e4p4v292d474?k=k574o4c596r5r3z4l3p42304f4x3u5m6c56694a546r5r3z433m4y204k4d474b4d374f4r554l4r3q4m3o4s204l4g434v4l3j4w234s4x3a6");
+                });
+                
+
             NavigateSettingPage.Subscribe(_ => navigationService.NavigateAsync(nameof(SettingPage)));
         }
 
